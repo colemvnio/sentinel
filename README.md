@@ -1,6 +1,6 @@
 # TransactionEntity Monitoring System
 
-This is an Event-Driven TransactionEntity Monitoring System built with Node.js and Express. It's designed to handle and monitor online transactions. The system follows principles from Domain-Driven Design (DDD), Clean Architecture, and the Repository Pattern. It integrates MongoDB for data storage, InfluxDB for event storage, and Stripe for payment processing.
+This is an Event-Driven Transaction Monitoring System built with Node.js and Express. It's designed to handle and monitor online transactions. The system follows principles from Domain-Driven Design (DDD), Clean Architecture, and the Repository Pattern. It integrates MongoDB for data storage, InfluxDB for event storage, and Stripe for payment processing.
 
 ## Table of Contents
 
@@ -26,8 +26,19 @@ This project is created with:
 To run this project, install it locally using npm:
 
 ```
-$ git clone https://(...)
+$ git clone https://github.com/colemvnio/sentinel
 $ cd project
+
+$ brew update
+$ brew install nvm
+$ mkdir ~/.nvm
+
+$ echo "export NVM_DIR=~/.nvm\nsource \$(brew --prefix nvm)/nvm.sh" >> .zshrc
+$ source ~/.zshrc
+
+// Uses the default `.nvmrc` file
+$ nvm use
+ 
 $ npm install
 $ npm start
 ```
@@ -74,4 +85,4 @@ This will execute all unit and integration tests.
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are currently not available for the public.
