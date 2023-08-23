@@ -1,0 +1,63 @@
+@startuml
+actor Customer
+participant "API" as App
+participant "Transaction Service" as Service
+participant "Stripe.js" as Stripe
+database "MongoDB" as DB
+participant "Event Handler" as Event
+database "InfluxDB" as Influx
+
+Customer->App: POST /transactions
+
+App->Service: createTransaction()
+note right of Service: Non-blocking event emission
+Service->Event: emitEvent('transactionInitiated')
+Event->Influx: saveEvent()
+Influx-->Event: saveResponse
+
+alt success
+    Service->Stripe: createCharge()
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('transactionSubmitted')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+    Stripe-->Service: chargeResponse
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('transactionCaptured')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+else failure
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('stripeChargeFailed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+end
+
+alt success
+    Service->DB: saveTransaction()
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('transactionFinalized')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+    DB-->Service: saveResponse
+else failure
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('transactionSaveFailed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+end
+
+alt success
+    Service-->App: transactionResponse
+    App-->Customer: 200 OK
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('transactionCompleted')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+else failure
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('transactionResponseFailed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+end
+@enduml

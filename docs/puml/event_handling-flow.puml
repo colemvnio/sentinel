@@ -1,0 +1,22 @@
+@startuml
+participant "Event Emitter" as Service
+participant "Event Handler" as Event
+database "InfluxDB" as Influx
+participant "Notification Service" as Notify
+participant "Monitoring Group" as Monitor
+
+Service->Event: emitEvent('eventName')
+note right of Event: Non-blocking event emission
+Event->Influx: saveEvent()
+Influx-->Event: saveResponse
+
+alt success
+    Event->Notify: notifyEventSaved('eventName')
+    Notify->Monitor: sendNotification('Event Saved')
+else failure
+    Event->Notify: notifyEventSaveFailed('eventName')
+    Notify->Monitor: sendNotification('Event Save Failed')
+end
+
+Monitor-->Notify: notificationReceived
+@enduml

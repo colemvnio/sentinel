@@ -1,0 +1,63 @@
+@startuml
+actor Customer
+participant "API" as App
+participant "Refund Service" as Service
+participant "Stripe.js" as Stripe
+database "MongoDB" as DB
+participant "Event Handler" as Event
+database "InfluxDB" as Influx
+
+Customer->App: POST /refunds
+
+App->Service: createRefund()
+note right of Service: Non-blocking event emission
+Service->Event: emitEvent('refundInitiated')
+Event->Influx: saveEvent()
+Influx-->Event: saveResponse
+
+alt success
+    Service->Stripe: createRefund()
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('refundSubmitted')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+    Stripe-->Service: refundResponse
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('refundProcessed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+else failure
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('stripeRefundFailed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+end
+
+alt success
+    Service->DB: saveRefund()
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('refundFinalized')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+    DB-->Service: saveResponse
+else failure
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('refundSaveFailed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+end
+
+alt success
+    Service-->App: refundResponse
+    App-->Customer: 200 OK
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('refundCompleted')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+else failure
+    note right of Service: Non-blocking event emission
+    Service->Event: emitEvent('refundResponseFailed')
+    Event->Influx: saveEvent()
+    Influx-->Event: saveResponse
+end
+@enduml
