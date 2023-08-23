@@ -14,15 +14,15 @@
  * @property {string} TRANSACTION_RESPONSE_FAILED - Emitted when the application fails to send the response to the customer.
  */
 const TransactionEvents = Object.freeze({
-    TRANSACTION_REQUEST_RECEIVED: 'transaction_request_received',
-    TRANSACTION_PROCESSING_STARTED: 'transaction_processing_started',
-    TRANSACTION_CHARGE_SUCCEEDED: 'transaction_charge_succeeded',
-    TRANSACTION_CHARGE_FAILED: 'transaction_charge_failed',
-    TRANSACTION_SAVING_STARTED: 'transaction_saving_started',
-    TRANSACTION_SAVED: 'transaction_saved',
-    TRANSACTION_SAVE_FAILED: 'transaction_save_failed',
-    TRANSACTION_RESPONSE_SENT: 'transaction_response_sent',
-    TRANSACTION_RESPONSE_FAILED: 'transaction_response_failed',
+  TRANSACTION_REQUEST_RECEIVED: 'transaction_request_received',
+  TRANSACTION_PROCESSING_STARTED: 'transaction_processing_started',
+  TRANSACTION_CHARGE_SUCCEEDED: 'transaction_charge_succeeded',
+  TRANSACTION_CHARGE_FAILED: 'transaction_charge_failed',
+  TRANSACTION_SAVING_STARTED: 'transaction_saving_started',
+  TRANSACTION_SAVED: 'transaction_saved',
+  TRANSACTION_SAVE_FAILED: 'transaction_save_failed',
+  TRANSACTION_RESPONSE_SENT: 'transaction_response_sent',
+  TRANSACTION_RESPONSE_FAILED: 'transaction_response_failed',
 });
 
 module.exports = TransactionEvents;

@@ -5,8 +5,8 @@ const router = express.Router();
 
 // region GET
 router.get(
-    '/:id',
-    (req, res, next) => new TransactionController(req, res).detail().catch(next)
+  '/:id',
+  (req, res, next) => new TransactionController(req, res).detail().catch(next),
 );
 // endregion
 
@@ -18,8 +18,8 @@ router.get(
 
 // region POST
 router.post(
-    '/transactions',
-    (req, res, next) => new TransactionController().create().catch(next)
+  '/transactions',
+  (req, res, next) => new TransactionController().create().catch(next),
 );
 // endregion
 

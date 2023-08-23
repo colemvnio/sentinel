@@ -16,41 +16,41 @@ const { format, createLogger, transports } = require('winston');
  * 6 - Silly: Prints stack trace of calling function, useful for debugging.
  */
 const logger = createLogger({
-    transports: [
-        new transports.Console({
-            level: 'debug',
-            handleExceptions: true,
-            format: format.combine(
-                format.timestamp(),
-                format.colorize(),
-                format.printf(
-                    (info) => `[${process.env.NODE_ENV.toUpperCase()}] ${info.timestamp} ${info.level}: ${info.message}`,
-                )
-            ),
-        }),
-    ],
-    exitOnError: false,
+  transports: [
+    new transports.Console({
+      level: 'debug',
+      handleExceptions: true,
+      format: format.combine(
+        format.timestamp(),
+        format.colorize(),
+        format.printf(
+          (info) => `[${process.env.NODE_ENV.toUpperCase()}] ${info.timestamp} ${info.level}: ${info.message}`,
+        ),
+      ),
+    }),
+  ],
+  exitOnError: false,
 });
 
 if (process.env.NODE_ENV === 'development') {
-    logger.add(
-        new transports.File({
-            level: 'info',
-            filename: './logs/all-logs.log',
-            handleExceptions: true,
-            format: format.combine(
-                format.timestamp(),
-                format.errors({ stack: true }),
-                format.printf(
-                    (info) => `${info.timestamp} ${info.level}: ${info.message}`,
-                )
-            ),
-            maxsize: 5242880,
-            maxFiles: 5,
-        }));
+  logger.add(
+    new transports.File({
+      level: 'info',
+      filename: './logs/all-logs.log',
+      handleExceptions: true,
+      format: format.combine(
+        format.timestamp(),
+        format.errors({ stack: true }),
+        format.printf(
+          (info) => `${info.timestamp} ${info.level}: ${info.message}`,
+        ),
+      ),
+      maxsize: 5242880,
+      maxFiles: 5,
+    }),
+  );
 }
 
 logger.info('Logging started');
-
 
 module.exports = logger;

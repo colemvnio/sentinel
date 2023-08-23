@@ -19,19 +19,19 @@
  * @property {string} DISPUTE_CLOSED - Emitted when a dispute is closed.
  */
 const StripeEventNames = Object.freeze({
-    CHARGE_CREATED: 'charge_created',
-    CHARGE_CAPTURED: 'charge_captured',
-    CHARGE_FAILED: 'charge_failed',
-    CHARGE_UPDATED: 'charge_updated',
-    CHARGE_REFUNDED: 'charge_refunded',
-    CUSTOMER_CREATED: 'customer_created',
-    CUSTOMER_UPDATED: 'customer_updated',
-    PREAUTHORIZATION_HOLD_CREATED: 'authorization_hold_created',
-    PREAUTHORIZATION_HOLD_UPDATED: 'authorization_hold_updated',
-    PREAUTHORIZATION_HOLD_CAPTURED: 'authorization_hold_captured',
-    CARD_EXPIRING: 'card_expiring',
-    DISPUTE_CREATED: 'dispute_created',
-    DISPUTE_CLOSED: 'dispute_closed',
+  CHARGE_CREATED: 'charge_created',
+  CHARGE_CAPTURED: 'charge_captured',
+  CHARGE_FAILED: 'charge_failed',
+  CHARGE_UPDATED: 'charge_updated',
+  CHARGE_REFUNDED: 'charge_refunded',
+  CUSTOMER_CREATED: 'customer_created',
+  CUSTOMER_UPDATED: 'customer_updated',
+  PREAUTHORIZATION_HOLD_CREATED: 'authorization_hold_created',
+  PREAUTHORIZATION_HOLD_UPDATED: 'authorization_hold_updated',
+  PREAUTHORIZATION_HOLD_CAPTURED: 'authorization_hold_captured',
+  CARD_EXPIRING: 'card_expiring',
+  DISPUTE_CREATED: 'dispute_created',
+  DISPUTE_CLOSED: 'dispute_closed',
 });
 
 module.exports = StripeEventNames;

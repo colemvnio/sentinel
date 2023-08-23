@@ -5,27 +5,27 @@ const TimestampEntity = require('../../domain/entities/timestampEntity');
 const BaseService = require('./baseService');
 
 class TransactionService extends BaseService {
-    constructor() {
-        super(new TransactionRepository());
-    }
+  constructor() {
+    super(new TransactionRepository());
+  }
 
-    async getById(id) {
-        this.eventLoggingService.logEvent(
-            'view_transaction_detail',
-            id
-        );
-        return this.repository.getById(id);
-    }
+  async getById(id) {
+    this.eventLoggingService.logEvent(
+      'view_transaction_detail',
+      id,
+    );
+    return this.repository.getById(id);
+  }
 
-    async create(data, userId) {
-        const transaction = new TransactionEntity({
-            timestamp: new BaseTimestamp(new TimestampEntity(userId)),
-            amount: data.amount,
-            payment: data.payment
-        })
+  async create(data, userId) {
+    const transaction = new TransactionEntity({
+      timestamp: new BaseTimestamp(new TimestampEntity(userId)),
+      amount: data.amount,
+      payment: data.payment,
+    });
 
-        return this.repository.insertOne(transaction);
-    }
+    return this.repository.insertOne(transaction);
+  }
 }
 
 module.exports = TransactionService;

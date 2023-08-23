@@ -10,19 +10,17 @@ async function startServer() {
   // Middleware
   app.use(express.json());
   app.use(morgan((tokens, req, res) => {
-        const msg = [
-          tokens.method(req, res),
-          tokens.url(req, res),
-          tokens.status(req, res), '-',
-          tokens.res(req, res, 'content-length'), '-',
-          tokens['user-agent'](req, res), '-',
-          tokens['response-time'](req, res), 'ms'
+    const msg = [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res), '-',
+      tokens.res(req, res, 'content-length'), '-',
+      tokens['user-agent'](req, res), '-',
+      tokens['response-time'](req, res), 'ms',
 
-        ].join(' ');
-        logger.http(msg);
-      })
-  );
-
+    ].join(' ');
+    logger.http(msg);
+  }));
 
   // Routes
   app.use(routes);
@@ -38,9 +36,8 @@ async function startServer() {
     res.status(404).json({ error: 'Something went wrong' });
   });
 
-
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => logger.info(`Server running on port: ${PORT}`));
-};
+}
 
 module.exports = startServer;
