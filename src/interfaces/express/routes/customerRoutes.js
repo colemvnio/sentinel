@@ -5,8 +5,8 @@ const router = express.Router();
 
 // region GET
 router.get(
-    '/:id',
-    (req, res, next) => new CustomerController(req, res).detail().catch(next)
+  '/:id',
+  (req, res, next) => new CustomerController(req, res).detail().catch(next),
 );
 // endregion
 
@@ -18,8 +18,8 @@ router.get(
 
 // region POST
 router.post(
-    '/customers',
-    (req, res, next) => new CustomerController().create().catch(next)
+  '/customers',
+  (req, res, next) => new CustomerController().create().catch(next),
 );
 // endregion
 

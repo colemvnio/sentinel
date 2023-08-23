@@ -8,19 +8,19 @@ let client; // To hold the MongoDB client instance
  * @returns {Promise<MongoClient>}
  */
 async function connect() {
-    if (!client) {
-        const uri = process.env.MONGO_URL + process.env.MONGO_DBNAME;
-        logger.info(`Connecting to MongoDB: ${uri}`);
+  if (!client) {
+    const uri = process.env.MONGO_URL + process.env.MONGO_DBNAME;
+    logger.info(`Connecting to MongoDB: ${uri}`);
 
-        try {
-            client = new MongoClient(uri);
-            await client.connect();
-        } catch (error) {
-            logger.error('Error connecting to MongoDB:', error);
-            throw error;
-        }
+    try {
+      client = new MongoClient(uri);
+      await client.connect();
+    } catch (error) {
+      logger.error('Error connecting to MongoDB:', error);
+      throw error;
     }
-    return client;
+  }
+  return client;
 }
 
 /**
@@ -29,10 +29,10 @@ async function connect() {
  * @returns {*}
  */
 function getDb() {
-    if (!client || !process.env.MONGO_DBNAME) {
-        throw new Error('Database not initialized. Call connect() first.');
-    }
-    return client.db(process.env.MONGO_DBNAME);
+  if (!client || !process.env.MONGO_DBNAME) {
+    throw new Error('Database not initialized. Call connect() first.');
+  }
+  return client.db(process.env.MONGO_DBNAME);
 }
 
 module.exports = { connect, getDb };

@@ -6,7 +6,9 @@ const BaseEntity = require('../base/baseEntity');
  * @extends BaseEntity
  */
 class CustomerEntity extends BaseEntity {
-  constructor({ id, name, email, timestamp, stripe }) {
+  constructor({
+    id, name, email, timestamp, stripe,
+  }) {
     super(id, timestamp);
 
     this.name = name;

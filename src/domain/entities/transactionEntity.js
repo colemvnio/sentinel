@@ -6,7 +6,9 @@ const BaseEntity = require('../base/baseEntity');
  * @extends BaseEntity
  */
 class TransactionEntity extends BaseEntity {
-  constructor({ id, amount, amountRefunded, timestamp, payment }) {
+  constructor({
+    id, amount, amountRefunded, timestamp, payment,
+  }) {
     super(id, timestamp);
 
     this.amount = amount;
