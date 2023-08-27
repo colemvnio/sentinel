@@ -1,4 +1,5 @@
 const { Point } = require('@influxdata/influxdb-client');
+
 const { getDb } = require('../../infrastructure/database/influx');
 const logger = require('../../infrastructure/logger');
 
@@ -7,10 +8,10 @@ class BaseLoggingService {
     this.influxWrite = getDb();
   }
 
-  logEvent(eventName, documentId) {
-    // Create a new Point for the event
+  logEvent(eventName, { name = 'transactionId', identifier }) {
+    // TODO: Refactor the handling of points/data
     const point = new Point(eventName)
-      .tag('transactionId', documentId)
+      .tag(name, identifier)
       .floatField('value', 1.0)
       .timestamp(new Date());
 

@@ -19,11 +19,14 @@
  * @property {string} DISPUTE_CLOSED - Emitted when a dispute is closed.
  */
 const StripeEventNames = Object.freeze({
+  CHARGE_INITIATED: 'charge_initiated',
   CHARGE_CREATED: 'charge_created',
+  CHARGE_PENDING: 'charge_pending',
   CHARGE_CAPTURED: 'charge_captured',
   CHARGE_FAILED: 'charge_failed',
   CHARGE_UPDATED: 'charge_updated',
   CHARGE_REFUNDED: 'charge_refunded',
+  CUSTOMER_INITIATED: 'customer_initiated',
   CUSTOMER_CREATED: 'customer_created',
   CUSTOMER_UPDATED: 'customer_updated',
   PREAUTHORIZATION_HOLD_CREATED: 'authorization_hold_created',

@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+
 const logger = require('../logger');
 
 let client; // To hold the MongoDB client instance
@@ -35,4 +36,11 @@ function getDb() {
   return client.db(process.env.MONGO_DBNAME);
 }
 
-module.exports = { connect, getDb };
+function getClient() {
+  if (!client) {
+    throw new Error('Database not initialized. Call connect() first.');
+  }
+  return client;
+}
+
+module.exports = { connect, getDb, getClient };

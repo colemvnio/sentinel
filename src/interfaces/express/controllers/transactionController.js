@@ -1,4 +1,5 @@
 const TransactionService = require('../../../application/services/transactionService');
+
 const BaseController = require('./baseController');
 
 class TransactionController extends BaseController {

@@ -1,4 +1,5 @@
 const { InfluxDB } = require('@influxdata/influxdb-client');
+
 const logger = require('../logger');
 
 let client;

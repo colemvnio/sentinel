@@ -13,8 +13,24 @@ class BaseRepository {
     return this.collection.findOne({ _id: stringToObjectId(id) });
   }
 
-  async getAll(query) {
-    return this.collection.find(query).toArray();
+  async exists(query) {
+    const document = await this.getByQuery(query);
+    return !!document;
+  }
+
+  async getByQuery(query, bypassTimestamp = false) {
+    const objQuery = query;
+    if (objQuery._id) objQuery._id = stringToObjectId(query._id);
+    if (!bypassTimestamp) objQuery['timestamp.deleted'] = null;
+
+    return this.collection.findOne(query);
+  }
+
+  async getAll(query, bypassTimestamp = false) {
+    const objQuery = query;
+    if (!bypassTimestamp) objQuery['timestamp.deleted'] = null;
+
+    return this.collection.find(objQuery).toArray();
   }
 
   async insertOne(document) {
@@ -23,6 +39,9 @@ class BaseRepository {
   }
 
   async updateOne(query, update, options) {
+    const objQuery = query;
+    if (objQuery._id) objQuery._id = stringToObjectId(query._id);
+
     const result = await this.collection.updateOne(query, update, options);
     return result.modifiedCount;
   }

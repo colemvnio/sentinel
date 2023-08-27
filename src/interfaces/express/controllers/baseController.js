@@ -16,7 +16,7 @@ class BaseController {
     this.service = service;
     this.service.setDevice(this.device);
 
-    this.userId = 'local';
+    this.userId = this.body.userId || 'local';
   }
 
   async detail() {

@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const UAParser = require('ua-parser-js');
 
 const logger = require('../../infrastructure/logger');
+
 const routes = require('./routes');
 
 async function startServer() {

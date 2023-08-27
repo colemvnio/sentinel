@@ -8,7 +8,7 @@ const BaseTimestamp = require('./baseTimestamp');
  */
 class BaseEntity {
   constructor(id, timestamp) {
-    if (id !== undefined) this.id = id;
+    if (id !== undefined) this._id = id;
     this.timestamp = timestamp || new BaseTimestamp();
   }
 }

@@ -1,4 +1,5 @@
 const express = require('express');
+
 const CustomerController = require('../controllers/customerController');
 
 const router = express.Router();
@@ -6,7 +7,9 @@ const router = express.Router();
 // region GET
 router.get(
   '/:id',
-  (req, res, next) => new CustomerController(req, res).detail().catch(next),
+  (req, res, next) => new CustomerController(req, res)
+    .detail()
+    .catch(next),
 );
 // endregion
 
@@ -18,8 +21,10 @@ router.get(
 
 // region POST
 router.post(
-  '/customers',
-  (req, res, next) => new CustomerController().create().catch(next),
+  '/',
+  (req, res, next) => new CustomerController(req, res)
+    .create()
+    .catch(next),
 );
 // endregion
 
