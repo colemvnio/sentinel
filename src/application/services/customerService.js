@@ -11,10 +11,12 @@ class CustomerService extends BaseService {
 
   async create(data, userId) {
     const customer = new CustomerEntity({
-      timestamp: new BaseTimestamp(new TimestampEntity(userId)),
+      timestamp: new BaseTimestamp(new TimestampEntity(userId, this.device)),
       name: data.name,
       email: data.email,
     });
+
+    customer.setDevice(this.device);
 
     return this.repository.insertOne(customer);
   }

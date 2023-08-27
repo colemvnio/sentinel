@@ -1,13 +1,21 @@
 class BaseController {
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   * @param {import('../../../../src/application/services/baseService')} service
+   */
   constructor(req, res, service) {
     if (new.target === BaseController) throw new TypeError('Cannot construct BaseController instances directly');
 
     this.req = req;
     this.res = res;
     this.body = req.body;
+    this.device = req?.deviceInfo;
     if (this.req.params) this.params = this.req.params;
 
     this.service = service;
+    this.service.setDevice(this.device);
+
     this.userId = 'local';
   }
 

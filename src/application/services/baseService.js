@@ -6,7 +6,12 @@ class BaseService {
       throw new TypeError('Cannot construct BaseService instances directly');
     }
     this.repository = repository;
+    this.device = null;
     this.eventLoggingService = new BaseLoggingService();
+  }
+
+  setDevice(device) {
+    this.device = device;
   }
 
   async getById(id) {

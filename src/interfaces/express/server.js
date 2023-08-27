@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const UAParser = require('ua-parser-js');
+
 const logger = require('../../infrastructure/logger');
 const routes = require('./routes');
 
@@ -22,6 +24,14 @@ async function startServer() {
     logger.http(msg);
   }));
 
+  // Inject device information
+  app.use((req, res, next) => {
+    const userAgent = req.headers['user-agent'];
+    const parser = new UAParser();
+    req.deviceInfo = parser.setUA(userAgent).getResult();
+    next();
+  });
+
   // Routes
   app.use(routes);
 
@@ -32,6 +42,7 @@ async function startServer() {
     next(err);
   });
 
+  // Default error handling
   app.use((req, res) => {
     res.status(404).json({ error: 'Something went wrong' });
   });

@@ -5,9 +5,10 @@
  * @param {Object} user
  */
 class TimestampEntity {
-  constructor(userId) {
+  constructor(userId, device) {
     this.date = new Date();
     this.userId = userId;
+    this.device = device;
   }
 }
 module.exports = TimestampEntity;
