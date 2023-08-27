@@ -19,7 +19,7 @@ class TransactionService extends BaseService {
 
   async create(data, userId) {
     const transaction = new TransactionEntity({
-      timestamp: new BaseTimestamp(new TimestampEntity(userId)),
+      timestamp: new BaseTimestamp(new TimestampEntity(userId, this.device)),
       amount: data.amount,
       payment: data.payment,
     });

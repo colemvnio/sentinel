@@ -18,8 +18,8 @@ router.get(
 
 // region POST
 router.post(
-  '/transactions',
-  (req, res, next) => new TransactionController().create().catch(next),
+  '/',
+  (req, res, next) => new TransactionController(req, res).create().catch(next),
 );
 // endregion
 

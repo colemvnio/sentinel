@@ -1,5 +1,3 @@
-## Merge Request: [Feature/Issue Title]
-
 ### Description
 - (...)
 
