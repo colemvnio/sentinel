@@ -1,35 +1,38 @@
 docs:
-  - any: ['*.md']
+  - '*.md'
 
-'package.json':
-  - any: ['package.json', 'package-lock.json']
+package:
+  - 'package.json'
+  - 'package-lock.json'
 
 test:
-  - any: ['test/**/*.js']
+  - 'test/**/*.js'
 
 source:
-  - any: ['src/**', '!src/docs/*']
+  - 'src/**'
+  - '!src/docs/**'
 
 backend:
-  - any: ['src/**/*.js']
+  - 'src/**/*.js'
 
 application:
-  - any: ['src/application/**/.js']
+  - 'src/application/**/*.js'
 
 domain:
-  - any: ['src/domain/**/.js']
+  - 'src/domain/**/*.js'
 
 enums:
-  - any: ['src/enums/**/.js']
+  - 'src/enums/**/*.js'
 
 infrastructure:
-  - any: ['src/infrastructure/**/.js', '.github/**/.yml']
+  - 'src/infrastructure/**/*.js'
+  - '.github/**/*.yml'
 
 interfaces:
-  - any: ['src/interfaces/**/.js']
+  - 'src/interfaces/**/*.js'
 
 repositories:
-  - any: ['src/repositories/**/.js']
+  - 'src/repositories/**/*.js'
 
 utils:
-  - any: ['src/utils/**/.js']
+  - 'src/utils/**/*.js'
