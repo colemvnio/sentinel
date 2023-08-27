@@ -10,13 +10,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "reset": "rm -rf package-lock.json node_modules && npm i"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@influxdata/influxdb-client": "^1.33.2",
+    "decimal.js": "^10.4.3",
     "express": "^4.18.2",
     "mongodb": "^5.7.0",
     "morgan": "^1.10.0",

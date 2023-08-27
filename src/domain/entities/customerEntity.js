@@ -9,15 +9,18 @@ const BaseEntity = require('../base/baseEntity');
  */
 class CustomerEntity extends BaseEntity {
   constructor({
-    id, name, email, timestamp, stripe, devices = [],
+    id, firstName, lastName, fullName, email, phone, stripe, devices = [], timestamp,
   }) {
     super(id, timestamp);
 
-    this.name = name;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.fullName = fullName || `${firstName} ${lastName}`;
     this.email = email;
     this.devices = devices;
 
     // Optional properties
+    if (phone !== undefined) this.phone = phone;
     if (stripe !== undefined) this.stripe = stripe;
   }
 
