@@ -20,7 +20,7 @@
     "@influxdata/influxdb-client": "^1.33.2",
     "decimal.js": "^10.4.3",
     "express": "^4.18.2",
-    "mongodb": "^5.7.0",
+    "mongodb": "^6.0.0",
     "morgan": "^1.10.0",
     "nanoid": "^3.3.5",
     "stripe": "^13.2.0",
