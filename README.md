@@ -1,4 +1,4 @@
-# Financial Monitoring System
+# WIP: Financial Monitoring System
 
 This is an Event-Driven Transaction Monitoring System built with Node.js and Express. It's designed to handle and monitor online transactions. The system follows principles from Domain-Driven Design (DDD), Clean Architecture, and the Repository Pattern. It integrates MongoDB for data storage, InfluxDB for event storage, and Stripe for payment processing.
 
